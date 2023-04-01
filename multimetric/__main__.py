@@ -78,8 +78,13 @@ def ArgParser():
         default=True,
         help="Ignore unparseable files")
     get_additional_parser_args(parser)
-    parser.add_argument("files", nargs='+', help="Files to parse")
+    
+    parser.add_argument("targets_file", help="File with targets to parse")
     RUNARGS = parser.parse_args()
+
+    with open(RUNARGS.targets_file, 'rb') as f:
+        RUNARGS.files = f.read().decode().split()
+    
     # Turn all paths to abs-paths right here
     RUNARGS.files = [os.path.abspath(x) for x in RUNARGS.files]
     return RUNARGS
