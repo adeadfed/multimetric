@@ -83,7 +83,7 @@ def ArgParser():
     RUNARGS = parser.parse_args()
 
     with open(RUNARGS.targets_file, 'rb') as f:
-        RUNARGS.files = f.read().decode().split()
+        RUNARGS.files = f.read().decode().splitlines()
     
     # Turn all paths to abs-paths right here
     RUNARGS.files = [os.path.abspath(x) for x in RUNARGS.files]
